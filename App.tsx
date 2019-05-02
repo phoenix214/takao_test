@@ -10,21 +10,21 @@ import React from 'react'
 import { Component } from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import PureChart from 'react-native-pure-chart';
 
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+    let sampleData = [
+      {x: '2018-01-01', y: 30},
+      {x: '2018-01-02', y: 200},
+      {x: '2018-01-03', y: 170},
+      {x: '2018-01-04', y: 250},
+      {x: '2018-01-05', y: 10}
+    ];
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <PureChart data={sampleData} type='line' />
       </View>
     );
   }
