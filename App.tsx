@@ -21,9 +21,9 @@ export class App extends Component<Props> {
 
     let graphData: any = [];
     const { trade } = this.props;
-    if(trade && !trade.isFetching && trade.data) {
+    if (trade && !trade.isFetching && trade.data) {
       const data = trade.data.result[dataId];
-      for(let i = 0; i<data.length; i++) {
+      for (let i = 0; i<data.length; i++) {
         const date = new Date(data[i][2] * 1000);
         graphData.push({x: date.toString(), y: parseFloat(data[i][0])});
       }
@@ -32,8 +32,13 @@ export class App extends Component<Props> {
       <View>
         <Text>Recent Trades</Text>
         {
-          graphData ? 
-          <PureChart data={graphData} type='line' height={200} />
+          graphData && graphData.length > 0 ? 
+          <PureChart 
+            data={graphData}
+            type='line'
+            width={'100%'}
+            height={200}
+          />
           :
           <Text>Loading...</Text>
         }
@@ -44,13 +49,13 @@ export class App extends Component<Props> {
 }
 
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
       trade: state.trade
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return {
       ...bindActionCreators({ fetchTrades }, dispatch)
   }

@@ -1,7 +1,7 @@
 import { GET_TRADE, GET_TRADE_SUCCESS, GET_TRADE_FAILURE } from './constants';
 
-export function fetchTrades(dataId) {
-  return (dispatch) => {
+export function fetchTrades(dataId: any) {
+  return (dispatch: any) => {
     dispatch(getTrade())
 
     return(fetch(`https://api.kraken.com/0/public/Trades?pair=${dataId}`))
@@ -9,7 +9,7 @@ export function fetchTrades(dataId) {
     .then(json => {
         return(dispatch(getTradeSuccess(json)))
     })
-    .catch(err => dispatch(getTradeFailure(err)))
+    .catch(err => dispatch(getTradeFailure()))
   }
 }
 
@@ -19,7 +19,7 @@ function getTrade() {
   }
 }
 
-function getTradeSuccess(data) {
+function getTradeSuccess(data: any) {
   return {
       type: GET_TRADE_SUCCESS,
       data

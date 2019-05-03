@@ -6,7 +6,7 @@ const initialState = {
   data: '',
 };
 
-const trade = (state = initialState, action) => {
+const trade = (state = initialState, action: any) => {
   switch(action.type) {
     case GET_TRADE:
       return {
