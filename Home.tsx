@@ -55,7 +55,6 @@ export class App extends Component<Props, State> {
     } else {
       Alert.alert('Error', 'User credentials are not correct, please try again!');
     }
-    
   }
 
   render() {
