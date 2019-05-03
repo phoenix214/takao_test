@@ -1,6 +1,5 @@
 import React from 'react'
 import { Component } from 'react';
-import { Alert } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PureChart from 'react-native-pure-chart';
