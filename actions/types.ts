@@ -1,1 +1,0 @@
-export const GET_TRADE = 'GET_TRADE'

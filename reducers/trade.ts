@@ -1,10 +1,9 @@
 // placeReducer.js
 
-import { GET_TRADE } from '../actions/types';
+import { GET_TRADE, GET_TRADE_SUCCESS, GET_TRADE_FAILURE } from '../actions/constants';
 
 const initialState = {
-  placeName: '',
-  places: []
+  data: '',
 };
 
 const trade = (state = initialState, action) => {
@@ -12,7 +11,19 @@ const trade = (state = initialState, action) => {
     case GET_TRADE:
       return {
         ...state,
-        data: action.payload,
+        isFetching: true,
+      };
+    case GET_TRADE_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        data: action.data,
+      };
+    case GET_TRADE_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        error: true,
       };
     default:
       return state;

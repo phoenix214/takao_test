@@ -1,50 +1,59 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react'
 import { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-
+import { View, Text } from 'react-native';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PureChart from 'react-native-pure-chart';
+import { fetchTrades } from './actions';
 
-type Props = {};
-export default class App extends Component<Props> {
+
+type Props = {
+  trade: any,
+  fetchTrades: Function,
+};
+const dataId = 'XXBTZUSD';
+export class App extends Component<Props> {
+  componentDidMount() {
+    this.props.fetchTrades(dataId);
+  }
+
   render() {
-    let sampleData = [
-      {x: '2018-01-01', y: 30},
-      {x: '2018-01-02', y: 200},
-      {x: '2018-01-03', y: 170},
-      {x: '2018-01-04', y: 250},
-      {x: '2018-01-05', y: 10}
-    ];
+
+    let graphData: any = [];
+    const { trade } = this.props;
+    if(trade && !trade.isFetching && trade.data) {
+      const data = trade.data.result[dataId];
+      for(let i = 0; i<data.length; i++) {
+        const date = new Date(data[i][2] * 1000);
+        graphData.push({x: date.toString(), y: parseFloat(data[i][0])});
+      }
+    }
     return (
-      <View style={styles.container}>
-        <PureChart data={sampleData} type='line' />
+      <View>
+        <Text>Recent Trades</Text>
+        {
+          graphData ? 
+          <PureChart data={graphData} type='line' height={200} />
+          :
+          <Text>Loading...</Text>
+        }
       </View>
     );
+  
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
+
+function mapStateToProps(state) {
+  return {
+      trade: state.trade
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      ...bindActionCreators({ fetchTrades }, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
