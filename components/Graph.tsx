@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PureChart from 'react-native-pure-chart';
 import styled from 'styled-components';
-import { fetchTrades } from './actions';
+import { fetchTrades } from '../actions';
 
 const Container = styled.View`
   padding-vertical: 20px;
@@ -23,8 +23,10 @@ const LoadingText = styled.Text`
 type Props = {
   trade: any,
   fetchTrades: Function,
+  navigation: any,
 };
 const dataId = 'XXBTZUSD';
+
 export class Graph extends Component<Props> {
   componentDidMount() {
     this.props.fetchTrades(dataId);
@@ -58,7 +60,6 @@ export class Graph extends Component<Props> {
     );
   }
 }
-
 
 function mapStateToProps(state: any) {
   return {
