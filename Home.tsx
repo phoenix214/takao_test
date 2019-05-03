@@ -51,7 +51,7 @@ export class App extends Component<Props, State> {
     const { navigation } = this.props;
     const { username, password } = this.state;
     if (username === 'test' && password === 'test') {
-      navigation.navigate('Graph');
+      navigation.navigate('MarketList');
     } else {
       Alert.alert('Error', 'User credentials are not correct, please try again!');
     }
@@ -61,7 +61,7 @@ export class App extends Component<Props, State> {
     const { username, password } = this.state;
     return (
       <Container>
-        <Title>Recent Trades</Title>
+        <Title>Markets Info</Title>
         <Input
           onChangeText={this.onChangeUsername} 
           placeholder='Username'

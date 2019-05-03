@@ -60,6 +60,10 @@ If everything is set up correctly, your device will be listed as the build targe
 
 After above configurations, in the same way as Android, you can run ```$ react-native run-ios```.
 
+## Testing
+The temporary username and password are both `test`.
+After you logged in, you can see the list and chart based on the requirements.
+
 ## Next Steps
 
 Check out [our React TypeScript tutorial](https://github.com/Microsoft/TypeScript-React-Starter) where we also cover topics like state management with [Redux](http://redux.js.org).

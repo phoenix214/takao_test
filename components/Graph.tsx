@@ -1,6 +1,6 @@
 import React from 'react'
 import { Component } from 'react';
-
+import { Alert } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PureChart from 'react-native-pure-chart';
@@ -25,17 +25,19 @@ type Props = {
   fetchTrades: Function,
   navigation: any,
 };
-const dataId = 'XXBTZUSD';
+
 
 export class Graph extends Component<Props> {
   componentDidMount() {
+    const { dataId } = this.props.navigation.state.params;
     this.props.fetchTrades(dataId);
   }
 
   render() {
     let graphData: any = [];
+    const { dataId } = this.props.navigation.state.params;
     const { trade } = this.props;
-    if (trade && !trade.isFetching && trade.data) {
+    if (trade && !trade.isFetching && trade.data && trade.data.result) {
       const data = trade.data.result[dataId];
       for (let i = 0; i<data.length; i++) {
         const date = new Date(data[i][2] * 1000);
